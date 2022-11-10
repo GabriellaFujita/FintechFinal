@@ -1,19 +1,19 @@
 package br.com.fiap.dao;
-
-import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import br.com.fiap.bean.Gasto;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OracleGastoDAO implements GastoDAO {
 	private Connection conexao;
 
 	@Override
-	public void cadastrar(Gasto gasto) {
+	public void cadastrar(Gasto gasto) throws DBException {
 	  PreparedStatement stmt = null;
   
 	  try {
@@ -27,6 +27,7 @@ public class OracleGastoDAO implements GastoDAO {
 		stmt.executeUpdate();
 	  } catch (SQLException e) {
 		  e.printStackTrace();
+		  throw new DBException("Erro ao cadastrar.");
 	  } finally {
 		try {
 		  stmt.close();
@@ -75,7 +76,7 @@ public class OracleGastoDAO implements GastoDAO {
 	}
   
 	@Override
-	public void atualizar(Gasto gasto){
+	public void atualizar(Gasto gasto) throws DBException {
 	  PreparedStatement stmt = null;
   
 	  try {
@@ -90,6 +91,7 @@ public class OracleGastoDAO implements GastoDAO {
 		stmt.executeUpdate();
 	  } catch (SQLException e) {
 		e.printStackTrace();
+		throw new DBException("Erro ao atualizar.");
 	  } finally {
 		try {
 		  stmt.close();
@@ -101,7 +103,7 @@ public class OracleGastoDAO implements GastoDAO {
 	}
   
 	@Override
-	public void remover(int codigo){
+	public void remover(int codigo) throws DBException {
 	  PreparedStatement stmt = null;
   
 	  try {
@@ -112,6 +114,7 @@ public class OracleGastoDAO implements GastoDAO {
 		stmt.executeUpdate();
 	  } catch (SQLException e) {
 		e.printStackTrace();
+		throw new DBException("Erro ao remover.");
 	  } finally {
 		try {
 		  stmt.close();

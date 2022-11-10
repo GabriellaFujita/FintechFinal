@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.fiap.bean.Receita;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OracleReceitaDAO implements ReceitaDAO {
@@ -13,7 +14,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
   private Connection conexao;
 
   @Override
-  public void cadastrar(Receita receita) {
+  public void cadastrar(Receita receita) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -27,6 +28,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
     	e.printStackTrace();
+    	throw new DBException("Erro ao cadastrar.");
     } finally {
       try {
         stmt.close();
@@ -75,7 +77,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
   }
 
   @Override
-  public void atualizar(Receita receita){
+  public void atualizar(Receita receita) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -90,6 +92,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao atualizar.");
     } finally {
       try {
         stmt.close();
@@ -101,7 +104,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
   }
 
   @Override
-  public void remover(int codigo){
+  public void remover(int codigo) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -112,6 +115,7 @@ public class OracleReceitaDAO implements ReceitaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao remover.");
     } finally {
       try {
         stmt.close();
