@@ -3,12 +3,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.fiap.bean.Transacao;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OracleTransacaoDAO implements TransacaoDAO {
@@ -16,7 +15,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
   private Connection conexao;
 
   @Override
-  public void cadastrar(Transacao transacao) {
+  public void cadastrar(Transacao transacao) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -24,7 +23,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
       String sql = "INSERT INTO T_TRANSACAO(CD_TRANSACAO, VL_TRANSACAO, DT_TRANSACAO, CD_GASTO, CD_RECEITA, CD_INVESTIMENTO, CD_PESSOA) VALUES (SQ_TRANSACAO.NEXTVAL, ?, ?, ?, ?, ?, ?)";
       stmt = conexao.prepareStatement(sql);
       stmt.setDouble(1, transacao.getValor());
-      java.sql.Date data = new java.sql.Date(transacao.getDataTransacao().getDayOfYear());
+      java.sql.Date data = new java.sql.Date(transacao.getDataTransacao().getTimeInMillis());
       stmt.setDate(2, data);
       stmt.setInt(3, transacao.getCodigoGasto());
       stmt.setInt(4, transacao.getCodigoReceita());
@@ -34,6 +33,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
     	e.printStackTrace();
+    	throw new DBException("Erro ao cadastrar.");
     } finally {
       try {
         stmt.close();
@@ -68,7 +68,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
         int codigoPessoa = rs.getInt("CD_PESSOA");
        
         //Cria um objeto Transacao com as informa��es encontradas
-        Transacao transacao = new Transacao(codigo, valor, LocalDateTime.now(Clock.systemDefaultZone()), codigoGasto, codigoReceita, codigoInvestimento, codigoPessoa);
+        Transacao transacao = new Transacao(codigo, valor, dataTransacao, codigoGasto, codigoReceita, codigoInvestimento, codigoPessoa);
         //Adiciona a transa��o na lista
         lista.add(transacao);
       }
@@ -87,7 +87,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
   }
 
   @Override
-  public void atualizar(Transacao transacao){
+  public void atualizar(Transacao transacao) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -95,7 +95,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
       String sql = "UPDATE T_TRANSACAO SET VL_TRANSACAO = ?, DT_TRANSACAO = ?, CD_GASTO = ?, CD_RECEITA = ?, CD_INVESTIMENTO = ?, CD_PESSOA = ? WHERE CD_TRANSACAO = ?";
       stmt = conexao.prepareStatement(sql);
       stmt.setDouble(1, transacao.getValor());
-      java.sql.Date data = new java.sql.Date(transacao.getDataTransacao().getDayOfYear());
+      java.sql.Date data = new java.sql.Date(transacao.getDataTransacao().getTimeInMillis());
       stmt.setDate(2, data);
       stmt.setInt(3, transacao.getCodigoGasto());
       stmt.setInt(4, transacao.getCodigoReceita());
@@ -106,6 +106,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao atualizar.");
     } finally {
       try {
         stmt.close();
@@ -117,7 +118,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
   }
 
   @Override
-  public void remover(int codigo){
+  public void remover(int codigo) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -128,6 +129,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao remover.");
     } finally {
       try {
         stmt.close();
@@ -160,7 +162,7 @@ public class OracleTransacaoDAO implements TransacaoDAO {
 	      int codigoInvestimento = rs.getInt("CD_INVESTIMENTO");
 	      int codigoPessoa = rs.getInt("CD_PESSOA");
 	      	
-	      transacao = new Transacao(codigo, valor,LocalDateTime.now(), codigoGasto, codigoReceita, codigoInvestimento, codigoPessoa);
+	      transacao = new Transacao(codigo, valor, dataTransacao, codigoGasto, codigoReceita, codigoInvestimento, codigoPessoa);
       }
       
     } catch (SQLException e) {

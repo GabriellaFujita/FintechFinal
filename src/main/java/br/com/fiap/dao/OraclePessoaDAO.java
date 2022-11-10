@@ -3,11 +3,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.fiap.bean.Pessoa;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OraclePessoaDAO implements PessoaDAO {
@@ -15,7 +15,7 @@ public class OraclePessoaDAO implements PessoaDAO {
   private Connection conexao;
 
   @Override
-  public void cadastrar(Pessoa pessoa) {
+  public void cadastrar(Pessoa pessoa) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -24,13 +24,14 @@ public class OraclePessoaDAO implements PessoaDAO {
       stmt = conexao.prepareStatement(sql);
       stmt.setString(1, pessoa.getNome());
       stmt.setString(2, pessoa.getCpf());
-      java.sql.Date data = new java.sql.Date(pessoa.getDataNascimento().getDayOfYear());
+      java.sql.Date data = new java.sql.Date(pessoa.getDataNascimento().getTimeInMillis());
       stmt.setDate(3, data);
       stmt.setString(4, pessoa.getEmail());
             
       stmt.executeUpdate();
     } catch (SQLException e) {
     	e.printStackTrace();
+    	throw new DBException("Erro ao cadastrar.");
     } finally {
       try {
         stmt.close();
@@ -63,7 +64,7 @@ public class OraclePessoaDAO implements PessoaDAO {
         String email = rs.getString("DS_EMAIL");
         
         //Cria um objeto Pessoa com as informações encontradas
-        Pessoa pessoa = new Pessoa(codigo, nome, cpf, LocalDate.now(), email);
+        Pessoa pessoa = new Pessoa(codigo, nome, cpf, dataNascimento, email);
         //Adiciona a pessoa na lista
         lista.add(pessoa);
       }
@@ -82,7 +83,7 @@ public class OraclePessoaDAO implements PessoaDAO {
   }
 
   @Override
-  public void atualizar(Pessoa pessoa){
+  public void atualizar(Pessoa pessoa) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -91,7 +92,7 @@ public class OraclePessoaDAO implements PessoaDAO {
       stmt = conexao.prepareStatement(sql);
       stmt.setString(1, pessoa.getNome());
       stmt.setString(2, pessoa.getCpf());
-      java.sql.Date data = new java.sql.Date(pessoa.getDataNascimento().getDayOfYear());
+      java.sql.Date data = new java.sql.Date(pessoa.getDataNascimento().getTimeInMillis());
       stmt.setDate(3, data);
       stmt.setString(4, pessoa.getEmail());
       stmt.setInt(5, pessoa.getCodigo());
@@ -99,6 +100,7 @@ public class OraclePessoaDAO implements PessoaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao atualizar.");
     } finally {
       try {
         stmt.close();
@@ -110,7 +112,7 @@ public class OraclePessoaDAO implements PessoaDAO {
   }
 
   @Override
-  public void remover(int codigo){
+  public void remover(int codigo) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -121,6 +123,7 @@ public class OraclePessoaDAO implements PessoaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao remover.");
     } finally {
       try {
         stmt.close();
@@ -151,7 +154,7 @@ public class OraclePessoaDAO implements PessoaDAO {
         dataNascimento.setTimeInMillis(data.getTime());
         String email = rs.getString("DS_EMAIL");
         
-        pessoa = new Pessoa(codigo, nome, cpf,LocalDate.now(), email);
+        pessoa = new Pessoa(codigo, nome, cpf, dataNascimento, email);
       }
       
     } catch (SQLException e) {

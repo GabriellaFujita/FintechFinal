@@ -1,10 +1,13 @@
 package br.com.fiap.dao;
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.fiap.bean.Meta;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OracleMetaDAO implements MetaDAO {
@@ -12,7 +15,7 @@ public class OracleMetaDAO implements MetaDAO {
   private Connection conexao;
 
   @Override
-  public void cadastrar(Meta meta) {
+  public void cadastrar(Meta meta) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -21,15 +24,16 @@ public class OracleMetaDAO implements MetaDAO {
       stmt = conexao.prepareStatement(sql);
       stmt.setInt(1, meta.getCodigoPessoa());
       stmt.setString(2, meta.getNome());
-      Date dataCriacao = new Date(meta.getDataCriacao().getDayOfYear());
+      java.sql.Date dataCriacao = new java.sql.Date(meta.getDataCriacao().getTimeInMillis());
       stmt.setDate(3, dataCriacao);
-      Date dataFinal = new Date(meta.getDataFinal().getDayOfYear());
+      java.sql.Date dataFinal = new java.sql.Date(meta.getDataFinal().getTimeInMillis());
       stmt.setDate(4, dataFinal);
       stmt.setDouble(5, meta.getValor());
             
       stmt.executeUpdate();
     } catch (SQLException e) {
     	e.printStackTrace();
+    	throw new DBException("Erro ao cadastrar.");
     } finally {
       try {
         stmt.close();
@@ -65,7 +69,7 @@ public class OracleMetaDAO implements MetaDAO {
         double valor = rs.getDouble("VL_META");
         
         //Cria um objeto Meta com as informações encontradas
-        Meta meta = new Meta(codigo, codigoPessoa, nome, LocalDate.now(), LocalDate.now(), valor);
+        Meta meta = new Meta(codigo, codigoPessoa, nome, dataCriacao, dataFinal, valor);
         //Adiciona a meta na lista
         lista.add(meta);
       }
@@ -84,7 +88,7 @@ public class OracleMetaDAO implements MetaDAO {
   }
 
   @Override
-  public void atualizar(Meta meta){
+  public void atualizar(Meta meta) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -93,9 +97,9 @@ public class OracleMetaDAO implements MetaDAO {
       stmt = conexao.prepareStatement(sql);
       stmt.setInt(1, meta.getCodigoPessoa());
       stmt.setString(2, meta.getNome());
-      Date dataCriacao = new Date(meta.getDataCriacao().getDayOfYear());
+      java.sql.Date dataCriacao = new java.sql.Date(meta.getDataCriacao().getTimeInMillis());
       stmt.setDate(3, dataCriacao);
-      Date dataFinal = new Date(meta.getDataFinal().getDayOfYear());
+      java.sql.Date dataFinal = new java.sql.Date(meta.getDataFinal().getTimeInMillis());
       stmt.setDate(4, dataFinal);
       stmt.setDouble(5, meta.getValor());
       stmt.setInt(6, meta.getCodigo());
@@ -103,6 +107,7 @@ public class OracleMetaDAO implements MetaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao atualizar.");
     } finally {
       try {
         stmt.close();
@@ -114,7 +119,7 @@ public class OracleMetaDAO implements MetaDAO {
   }
 
   @Override
-  public void remover(int codigo){
+  public void remover(int codigo) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -125,6 +130,7 @@ public class OracleMetaDAO implements MetaDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao remover.");
     } finally {
       try {
         stmt.close();
@@ -158,7 +164,7 @@ public class OracleMetaDAO implements MetaDAO {
         dataFinal.setTimeInMillis(data2.getTime());
         double valor = rs.getDouble("VL_META");
         
-        meta = new Meta(codigo, codigoPessoa, nome, LocalDate.now(), LocalDate.now(), valor);
+        meta = new Meta(codigo, codigoPessoa, nome, dataCriacao, dataFinal, valor);
       }
       
     } catch (SQLException e) {

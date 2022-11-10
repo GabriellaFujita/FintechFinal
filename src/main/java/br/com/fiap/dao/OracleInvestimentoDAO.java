@@ -3,11 +3,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.fiap.bean.Investimento;
+import br.com.fiap.exception.DBException;
 import br.com.fiap.jdbc.EmpresaDBManager;
 
 public class OracleInvestimentoDAO implements InvestimentoDAO {
@@ -15,7 +15,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
   private Connection conexao;
 
   @Override
-  public void cadastrar(Investimento investimento) {
+  public void cadastrar(Investimento investimento) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -26,12 +26,13 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
       stmt.setDouble(2, investimento.getValor());
       stmt.setString(3, investimento.getTipo());
       stmt.setDouble(4, investimento.getValorRendimento());
-      java.sql.Date dataDisponivel = new java.sql.Date(investimento.getDataDisponivel().getDayOfYear());
+      java.sql.Date dataDisponivel = new java.sql.Date(investimento.getDataDisponivel().getTimeInMillis());
       stmt.setDate(5, dataDisponivel);    
             
       stmt.executeUpdate();
     } catch (SQLException e) {
     	e.printStackTrace();
+    	throw new DBException("Erro ao cadastrar.");
     } finally {
       try {
         stmt.close();
@@ -65,7 +66,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
         dataDisponivel.setTimeInMillis(data.getTime());
         
         //Cria um objeto Investimento com as informacoes encontradas
-        Investimento investimento = new Investimento(codigo, nome, valor, tipo, valorRendimento, LocalDate.now());
+        Investimento investimento = new Investimento(codigo, nome, valor, tipo, valorRendimento, dataDisponivel);
         //Adiciona a meta na lista
         lista.add(investimento);
       }
@@ -84,7 +85,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
   }
 
   @Override
-  public void atualizar(Investimento investimento){
+  public void atualizar(Investimento investimento) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -95,13 +96,14 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
       stmt.setDouble(2, investimento.getValor());
       stmt.setString(3, investimento.getTipo());
       stmt.setDouble(4, investimento.getValorRendimento());
-      java.sql.Date dataDisponivel = new java.sql.Date(investimento.getDataDisponivel().getDayOfYear());
+      java.sql.Date dataDisponivel = new java.sql.Date(investimento.getDataDisponivel().getTimeInMillis());
       stmt.setDate(5, dataDisponivel);
       stmt.setInt(6, investimento.getCodigo());
 
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao atualizar.");
     } finally {
       try {
         stmt.close();
@@ -113,7 +115,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
   }
 
   @Override
-  public void remover(int codigo){
+  public void remover(int codigo) throws DBException {
     PreparedStatement stmt = null;
 
     try {
@@ -124,6 +126,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
       stmt.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new DBException("Erro ao remover.");
     } finally {
       try {
         stmt.close();
@@ -155,7 +158,7 @@ public class OracleInvestimentoDAO implements InvestimentoDAO {
         Calendar dataDisponivel = Calendar.getInstance();
         dataDisponivel.setTimeInMillis(data.getTime());
         
-        investimento = new Investimento(codigo, nome, valor, tipo, valorRendimento, LocalDate.now());
+        investimento = new Investimento(codigo, nome, valor, tipo, valorRendimento, dataDisponivel);
       }
       
     } catch (SQLException e) {
