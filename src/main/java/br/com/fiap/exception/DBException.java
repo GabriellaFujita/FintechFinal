@@ -18,7 +18,8 @@ public class DBException extends Exception {
 	public DBException(String message, Throwable cause)
 	
 	{super(message, cause);
-	// TODOAuto-generated constructor stub}
+	// TODOAuto-generated constructor stub
+	}
 	
 	public DBException(String message) {
 		super();
