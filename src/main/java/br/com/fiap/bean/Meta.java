@@ -1,6 +1,6 @@
 package br.com.fiap.bean;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Meta {
 
@@ -8,11 +8,15 @@ public class Meta {
 	public int codigo;
 	public int codigoPessoa;
 	public String nome;
-	public LocalDate dataCriacao;
-	public LocalDate dataFinal;
+	public Calendar dataCriacao;
+	public Calendar dataFinal;
 	public double valor;
+	
+	public Meta() {
+		super();
+	}
 
-	public Meta(int codigo, int codigoPessoa, String nome, LocalDate dataCriacao, LocalDate dataFinal, double valor) {
+	public Meta(int codigo, int codigoPessoa, String nome, Calendar dataCriacao, Calendar dataFinal, double valor) {
 		this.codigo = codigo;
 		this.codigoPessoa = codigoPessoa;
 		this.nome = nome;
@@ -45,19 +49,19 @@ public class Meta {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Calendar dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public LocalDate getDataFinal() {
+	public Calendar getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(LocalDate dataFinal) {
+	public void setDataFinal(Calendar dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 

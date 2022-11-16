@@ -1,18 +1,18 @@
 package br.com.fiap.bean;
-
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Pessoa {
-
-
-	
 	public int codigo;
 	public String nome;
 	public String cpf;
-	public LocalDate dataNascimento;
+	public Calendar dataNascimento;
 	public String email;
 
-	public Pessoa(int codigo, String nome, String cpf, LocalDate dataNascimento, String email) {
+	public Pessoa() {
+		super();
+	}
+	
+	public Pessoa(int codigo, String nome, String cpf, Calendar dataNascimento, String email) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -38,10 +38,10 @@ public class Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public LocalDate getDataNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getEmail() {

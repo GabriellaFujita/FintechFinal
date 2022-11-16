@@ -1,6 +1,6 @@
 package br.com.fiap.bean;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Investimento {
 
@@ -9,10 +9,13 @@ public class Investimento {
 	public double valor;
 	public String tipo;
 	public double valorRendimento;
-	public LocalDate dataDisponivel;
+	public Calendar dataDisponivel;
 
-
-	public Investimento(int codigo, String nome, double valor, String tipo, double valorRendimento, LocalDate dataDisponivel) {
+	public Investimento() {
+		super();
+	}
+	
+	public Investimento(int codigo, String nome, double valor, String tipo, double valorRendimento, Calendar dataDisponivel) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.valor = valor;
@@ -21,64 +24,51 @@ public class Investimento {
 		this.dataDisponivel = dataDisponivel;
 	}
 
-	public Investimento() {
-	}
-
 	public int getCodigo() {
 		return codigo;
 	}
-
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public double getValor() {
 		return valor;
 	}
-
 
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
-
 	public String getTipo() {
 		return tipo;
 	}
-
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-
 	public double getValorRendimento() {
 		return valorRendimento;
 	}
-
 
 	public void setValorRendimento(double valorRendimento) {
 		this.valorRendimento = valorRendimento;
 	}
 
-
-	public LocalDate getDataDisponivel() {
+	public Calendar getDataDisponivel() {
 		return dataDisponivel;
 	}
 
-	public void setDataDisponivel(LocalDate dataDisponivel) {
+	public void setDataDisponivel(Calendar dataDisponivel) {
 		this.dataDisponivel = dataDisponivel;
 	}
 

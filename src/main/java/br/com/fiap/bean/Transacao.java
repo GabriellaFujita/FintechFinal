@@ -1,19 +1,16 @@
 package br.com.fiap.bean;
-
-import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class Transacao {
-
-
 	public int codigo;
 	public double valor;
-	public LocalDateTime dataTransacao;
+	public Calendar dataTransacao;
 	public int codigoGasto;
 	public int codigoReceita;
 	public int codigoInvestimento;
 	public int codigoPessoa;
 
-	public Transacao(int codigo, double valor, LocalDateTime dataTransacao, int codigoGasto, int codigoReceita, int codigoInvestimento, int codigoPessoa) {
+	public Transacao(int codigo, double valor, Calendar dataTransacao, int codigoGasto, int codigoReceita, int codigoInvestimento, int codigoPessoa) {
 		this.codigo = codigo;
 		this.valor = valor;
 		this.dataTransacao = dataTransacao;
@@ -35,10 +32,10 @@ public class Transacao {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public LocalDateTime getDataTransacao() {
+	public Calendar getDataTransacao() {
 		return dataTransacao;
 	}
-	public void setDataTransacao(LocalDateTime dataTransacao) {
+	public void setDataTransacao(Calendar dataTransacao) {
 		this.dataTransacao = dataTransacao;
 	}
 	public int getCodigoGasto() {
