@@ -6,6 +6,8 @@ import br.com.fiap.exception.DBException;
 public interface PessoaDAO {
 	
 	    public void cadastrar(Pessoa pessoa) throws DBException;
+
+		public Boolean validarPessoa(Pessoa pessoa);
 	  
 	    public List<Pessoa> listar();
 	    

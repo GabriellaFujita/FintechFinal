@@ -1,23 +1,39 @@
 package br.com.fiap.bean;
 import java.util.Calendar;
+import br.com.fiap.util.*;
 
 public class Pessoa {
-	public int codigo;
-	public String nome;
-	public String cpf;
-	public Calendar dataNascimento;
-	public String email;
+	private int codigo;
+	private String nome;
+	private String cpf;
+	private Calendar dataNascimento;
+	private String email;
+	private String senha;
+
 
 	public Pessoa() {
 		super();
 	}
 	
-	public Pessoa(int codigo, String nome, String cpf, Calendar dataNascimento, String email) {
+	public Pessoa(int codigo, String nome, String cpf, Calendar dataNascimento, String email, String senha) {
 		this.codigo = codigo;
+		setSenha(senha);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha){
+		try {
+			this.senha = CriptografiaUtils.criptografar(senha);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int getCodigo() {
