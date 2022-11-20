@@ -1,0 +1,19 @@
+.navbar{
+    background-color: #8DE086;
+    margin-top: 20%;
+}
+
+.card {
+    margin-top: 20%;
+}
+
+.btn {
+    background-color: #8DE086;
+    margin-top: 5%;
+    color: #000;
+    border-color: #8DE086;
+}
+
+#gasto {
+    border-color: #970a0a; 
+}

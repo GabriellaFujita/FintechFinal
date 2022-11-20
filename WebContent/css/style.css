@@ -1,0 +1,91 @@
+#main {
+    background-color:  #DAD7CD;
+}
+
+#header {
+    background: #DAD7CD;
+    height: 250px;    
+}
+img{
+    display: block;
+    margin: 0px auto;
+    padding: 50px;
+}
+
+#login {
+    background: #DAD7CD;
+    height: 500px;
+}
+.ola {
+    font-family: serif;
+    /* font-style: italic; */
+    font-style: oblique;
+    color: #3A5A40;
+    font-size:xx-large;
+}
+.faça-login {
+    font-family: serif;
+    /* font-style: italic; */
+    font-style: oblique;
+    color: #3A5A40;
+    font-size:xx-large;
+    padding-bottom: 50px;
+}
+#input-email{
+    border-radius: 10px;
+}
+#InputPassword{
+border-radius: 10px;
+}
+#redefinir-senha {
+    font-size: medium;
+    color: #344E41;
+    padding-top: 1px;
+}
+#check-lembrar-senha {
+    font-size: medium;
+    color: #344E41;
+}
+#container-entrar{
+display: flex;
+justify-content: center;
+}
+.btn {
+    background: #A3B18A;
+    color: #344E41;
+    font-size: x-large;
+}
+#rodape {
+    /* height: 70px; */
+    background-color: #A3B18A;
+    height: 200px;
+    text-align: center;
+}
+#criar-conta{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:x-large;
+    color: #344E41;
+    font-weight: bold;
+    padding: 50px;
+}
+#topo-cadastro{
+    height: 200px;
+}
+#topo-verde{
+    background-color: #A3B18A;
+    height: 100px;
+}
+#topo-branco{
+    background-color: white;
+    height:100px;
+}
+/* #euro{
+    max-width: 150px;
+} */
+#usuario{
+    max-width: 175px;
+}
+#container-btn{
+    display: flex;
+    justify-content: space-between;
+}

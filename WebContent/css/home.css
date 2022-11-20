@@ -1,0 +1,31 @@
+.navbar{
+    background-color: #8DE086;
+    margin-top: 20%;
+}
+
+
+.card-saldo {
+    margin-top: 8%;
+    margin-bottom: 8%;
+    font-size: large;
+}
+
+.card-header {
+    background-color: #d9ffd5;
+    font-weight: bold;
+}
+
+.card {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.card-link {
+    color: #62945d;
+    text-decoration: none;
+}
+
+.card-link:hover {
+    color: #3a4194;
+    text-decoration: none;
+}

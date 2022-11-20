@@ -1,0 +1,19 @@
+body{ 
+	background-color: #FFFFFF;
+
+}
+
+.navbar{
+    background-color: #8DE086;
+    margin-top: 20%;
+    margin-bottom: 10%;
+
+}
+
+.cadastro-txt{
+    font-size: medium;
+}
+
+.btn{
+    background-color: #8DE086;
+}
