@@ -50,13 +50,13 @@
                       <a class="navbar-brand" href="#">
                         <img src="css/img/botao-home.png" alt="Home" width="40" height="40">
                       </a>
-                      <a class="navbar-brand" href="#">
+                      <a class="navbar-brand" href="investimento.jsp">
                         <img src="css/img/investimento.png" alt="Investimentos" width="40" height="40">
                       </a>
-                      <a class="navbar-brand" href="#">
+                      <a class="navbar-brand" href="metas.jsp">
                         <img src="css/img/alvo.png" alt="Metas" width="40" height="40">
                       </a>
-                      <a class="navbar-brand" href="#">
+                      <a class="navbar-brand" href="transacoes.jsp">
                         <img src="css/img/transacao.png" alt="Transações" width="40" height="40">
                       </a>
                   </div>
@@ -64,6 +64,7 @@
 
         </div>
       </div>
+    </div>
     </div>
 
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -18,7 +18,7 @@
         <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
             <nav class="navbar sticky-top">
                 <div class="container-fluid justify-content-start">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="home.jsp">
                       <img src="css/img/botao-home.png" alt="Home" width="30" height="24">
                     </a>
                 </div>

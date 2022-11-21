@@ -55,7 +55,7 @@
             </div>
             <div class="row">
               <div class="col d-flex justify-content-start my-3">
-                <a href="#">
+                <a href="home.jsp">
                   <button type="submit" class="btn" id="btn">Entrar</button>
                 </a>  
               </div>
@@ -64,7 +64,7 @@
 
           <nav class="navbar sticky-bottom">
             <div class="container-fluid justify-content-center">
-              <a class="navbar-brand" href="#">Criar minha conta</a>
+              <a class="navbar-brand" href="cadastro.jsp">Criar minha conta</a>
             </div>
           </nav>
 

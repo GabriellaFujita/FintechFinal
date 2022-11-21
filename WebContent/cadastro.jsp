@@ -56,7 +56,7 @@
                 </div>            
     
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn">Cadastrar</button>
+                    <button type="submit" class="btn" href="login.jsp">Cadastrar</button>
                 </div>
                 </form>
     
