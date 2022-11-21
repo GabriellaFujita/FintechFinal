@@ -17,7 +17,11 @@ public class EmailBO {
 		final String password = "senha";
 	}
 
-	Properties props = new Properties();props.put("mail.smtp.auth","true");props.put("mail.smtp.starttls.enable","true");props.put("mail.smtp.host","smtp.gmail.com");props.put("mail.smtp.port","587");
+	Properties props = new Properties();
+	props.put("mail.smtp.auth","true");
+	props.put("mail.smtp.starttls.enable","true");
+	props.put("mail.smtp.host","smtp.gmail.com");
+	props.put("mail.smtp.port","587");
 
 	Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 		protected PasswordAuthentication getPasswordAuthentication() {
@@ -28,7 +32,7 @@ public class EmailBO {
 	try {
 	Message email = new MimeMessage(
 			session);email.setFrom(new InternetAddress(username));email.setRecipients(Message.RecipientType.TO,InternetAddress.parse(destinatario));email.setSubject(assunto);email.setText(mensagem);Transport.send(email);}catch(
-	MessagingException e)
+	MessagingException e)F
 	{
 		throw new EmailException("Erro ao enviar o e-mail");
 	}
