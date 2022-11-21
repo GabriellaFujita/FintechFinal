@@ -50,7 +50,7 @@
                       <a class="navbar-brand" href="#">
                         <img src="css/img/botao-home.png" alt="Home" width="40" height="40">
                       </a>
-                      <a class="navbar-brand" href="investimento.jsp">
+                      <a class="navbar-brand" href="investimentos.jsp">
                         <img src="css/img/investimento.png" alt="Investimentos" width="40" height="40">
                       </a>
                       <a class="navbar-brand" href="metas.jsp">

@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/*")
+@WebFilter("/login")
 public class LoginFilter implements Filter{
 
 	
@@ -25,9 +25,9 @@ public class LoginFilter implements Filter{
 		
 		if (session.getAttribute("user") == null && !url.endsWith("login") && !url.contains("resources") && !url.contains("home")) {
 			request.setAttribute("erro", "Entre com o usu�rio e senha!");
-			request.getRequestDispatcher("home.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
-			chain.doFilter(request, response, chain);
+			chain.doFilter(request, response);
 		}
 		
 	}

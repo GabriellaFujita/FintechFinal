@@ -27,8 +27,8 @@
               <div class="card ">
                 <div class="card-body">
                   <h5 class="card-title"> Transações </h5>
-                  <a href="#" class="btn btn-primary">Adcionar receita</a>
-                  <a href="#" class="btn btn-primary" id="gasto">Adcionar gasto</a>
+                  <a href="#" class="btn btn-primary">Adicionar receita</a>
+                  <a href="#" class="btn btn-primary" id="gasto">Adicionar gasto</a>
                 </div>
               </div>
         </div>
